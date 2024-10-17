@@ -1,0 +1,28 @@
+.tarjeta-container-principal {
+    display: flex;
+    flex-wrap: wrap;  
+    justify-content: space-between; 
+    gap: 15px; /* Espacio entre las tarjetas */
+    padding: 15px;
+}
+
+.tarjetas-container {
+    width: 200px; /* Define un ancho fijo para cada tarjeta */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}
+
+img {
+    width: 100%; /* La imagen se ajustará al ancho de la tarjeta */
+    height: 200px;
+    object-fit: cover;
+}
+
+.tarjetas-container:hover{
+    transform: scale(1);
+    opacity: 0.8;
+}
