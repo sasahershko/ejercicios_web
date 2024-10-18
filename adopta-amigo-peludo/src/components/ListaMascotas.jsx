@@ -11,6 +11,11 @@ export default function ListaMascotas() {
     edad: '',
   });
 
+
+  //estado del modal
+  const [modalOpen, setIsModalOpen] = useState(false);
+  const [selectedMascota, setSelectedMascota] = useState(null);
+
   // Función para descargar las mascotas de la API
   async function downloadMascotas() {
     try {
@@ -27,12 +32,21 @@ export default function ListaMascotas() {
     downloadMascotas();
   }, []);
 
+  const abreModal = (mascota) =>{
+    setSelectedMascota(mascota);
+    setIsModalOpen(true);
+  };
+
+  const cierraModal = () =>{
+    setIsModalOpen(false);
+  };
+
 
   const mascotasFiltradas = mascotas.filter((mascota) => {
     return (
       (filtro.tipo === '' || mascota.tipo === filtro.tipo) &&
       (filtro.estado === '' || mascota.estado === filtro.estado) &&
-      (filtro.sexo === '' || mascota.sexo === filtro.sexo) 
+      (filtro.sexo === '' || mascota.genero === filtro.sexo) 
     );
   });
 
@@ -50,12 +64,18 @@ export default function ListaMascotas() {
               tipo={mascota.tipo}
               edad={mascota.edad}
               imagen={mascota.imagen}
+              estado={mascota.estado}
             />
           ))
         ) : (
           <p>No hay mascotas que coincidan con los filtros seleccionados.</p>
         )}
       </div>
+
+      <Modal open={modalOpen} close={closeModal}>
+
+        
+      </Modal>
     </div>
   );
 }

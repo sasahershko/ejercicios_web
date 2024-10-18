@@ -1,28 +1,55 @@
-.tarjeta-container-principal {
-    display: flex;
-    flex-wrap: wrap;  
-    justify-content: space-between; 
-    gap: 15px; /* Espacio entre las tarjetas */
-    padding: 15px;
+/* tarjeta.css */
+
+.tarjeta-container-principal{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
 .tarjetas-container {
-    width: 200px; /* Define un ancho fijo para cada tarjeta */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s;
-}
-
-img {
-    width: 100%; /* La imagen se ajustará al ancho de la tarjeta */
+    background-color: #e8daef; 
+    border-radius: 12px; 
+    padding: 20px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 300px; 
+    margin: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+    color: #ffffff; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Inter', sans-serif; /* Fuente moderna */
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.6s ease;
+  }
+  
+  .tarjetas-container img {
+    width: 100%;
     height: 200px;
-    object-fit: cover;
-}
+    border-radius: 8px; /* Imagen con bordes redondeados */
+    object-fit: cover; /* Asegurar que la imagen cubra el área */
+  }
+  
+  .tarjetas-container h1 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 12px;
+    color: #ffffff;
+  }
+  
+  .tarjetas-container p {
+    font-size: 0.9rem;
+    margin: 4px 0;
+    color: #a1a1a1; /* Texto secundario en color gris */
+  }
+  
+  .tarjetas-container:hover{
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
 
-.tarjetas-container:hover{
-    transform: scale(1);
-    opacity: 0.8;
-}
+  .tarjetas-container .edad {
+    font-size: 0.85rem;
+    margin-top: 8px;
+  }
+  

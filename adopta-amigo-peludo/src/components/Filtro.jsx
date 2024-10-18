@@ -15,13 +15,13 @@ export default function Filtro ({setFiltro}){
         })
     }
 
-
     return(
         <div>
             <select onChange={(e) => setTipo(e.target.value)}>
                 <option value="">Tipo</option>
                 <option value="Perro">Perro</option>
                 <option value="Gato">Gato</option>
+                <option value="Conejo">Conejo</option>
             </select>
             <select onChange={(e) => setEstado(e.target.value)}>
                 <option value="">Estado</option>
