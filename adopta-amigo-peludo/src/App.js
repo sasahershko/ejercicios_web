@@ -1,16 +1,31 @@
-import logo from './logo.svg';
-import {useState} from 'react';
 import './App.css';
 import ListaMascotas from './components/ListaMascotas';
+import { useState, useEffect } from 'react';
 import Filtro from './components/Filtro';
 
 export default function App() {
-  const defaultContent =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+ 
+  const [mascotas, setMascotas] = useState([]);
+
+  // Función para descargar las mascotas de la API
+  async function downloadMascotas() {
+    try {
+      const response = await fetch('https://huachitos.cl/api/animales');
+      const result = await response.json();
+      setMascotas(result.data); 
+    } catch (e) {
+      console.log('Error al descargar las mascotas: ' + e.message);
+    }
+  }
+
+  useEffect(() => {
+    downloadMascotas();
+  }, []);
 
   return (
     <div>
-      <ListaMascotas />
+      <h1>¡Adopta a un amigo peludo!</h1>
+      <ListaMascotas mascotas={mascotas} setMascotas={setMascotas}/>
     </div>
   );
 }

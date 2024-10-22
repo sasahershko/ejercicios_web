@@ -1,59 +1,47 @@
 import { useState, useEffect } from 'react';
 import Tarjeta from '../components/Tarjeta';
 import Filtro from './Filtro';
+import Modal from './Modal';
 
-export default function ListaMascotas() {
-  const [mascotas, setMascotas] = useState([]);
+export default function ListaMascotas({mascotas}) {
+
   const [filtro, setFiltro] = useState({
     tipo: '',
     estado: '',
     sexo: '',
     edad: '',
+    color: ''
   });
-
-
-  //estado del modal
-  const [modalOpen, setIsModalOpen] = useState(false);
-  const [selectedMascota, setSelectedMascota] = useState(null);
-
-  // Función para descargar las mascotas de la API
-  async function downloadMascotas() {
-    try {
-      const response = await fetch('https://huachitos.cl/api/animales');
-      const result = await response.json();
-      setMascotas(result.data); 
-    } catch (e) {
-      console.log('Error al descargar las mascotas: ' + e.message);
-    }
-  }
-
-
-  useEffect(() => {
-    downloadMascotas();
-  }, []);
-
-  const abreModal = (mascota) =>{
-    setSelectedMascota(mascota);
-    setIsModalOpen(true);
-  };
-
-  const cierraModal = () =>{
-    setIsModalOpen(false);
-  };
 
 
   const mascotasFiltradas = mascotas.filter((mascota) => {
     return (
       (filtro.tipo === '' || mascota.tipo === filtro.tipo) &&
       (filtro.estado === '' || mascota.estado === filtro.estado) &&
-      (filtro.sexo === '' || mascota.genero === filtro.sexo) 
+      (filtro.sexo === '' || mascota.genero === filtro.sexo) &&
+      (filtro.color) === '' || mascota.color === filtro.color && 
+      (filtro.edad === '' || mascota.edad === filtro.edad)
     );
   });
 
+  const [modalOpen, setModalOpen] = useState(false); 
+  const [selectedMascota, setSelectedMascota] = useState(null);
+
+  const openModal = (mascota) => {
+    setSelectedMascota(mascota);
+    setModalOpen(true);
+    document.body.classList.add('body-no-scroll');
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedMascota(null);
+    document.body.classList.remove('body-no-scroll');
+  };
+
   return (
     <div>
-      <Filtro setFiltro={setFiltro} />
-
+            <Filtro setFiltro={setFiltro} />
       <div className="tarjeta-container-principal">
         {mascotasFiltradas.length > 0 ? (
           mascotasFiltradas.map((mascota) => (
@@ -65,6 +53,8 @@ export default function ListaMascotas() {
               edad={mascota.edad}
               imagen={mascota.imagen}
               estado={mascota.estado}
+              genero={mascota.genero}
+              onClick={() => openModal(mascota)}
             />
           ))
         ) : (
@@ -72,10 +62,13 @@ export default function ListaMascotas() {
         )}
       </div>
 
-      <Modal open={modalOpen} close={closeModal}>
+      {modalOpen && (
+        <Modal 
+          mascota={selectedMascota} 
+          onClose={closeModal} 
+        />
+      )}
 
-        
-      </Modal>
     </div>
   );
 }
