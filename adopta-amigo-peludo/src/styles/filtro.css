@@ -1,28 +1,43 @@
 .filtro-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
     padding: 20px;
     background-color: #f5f5f5;
     border-radius: 10px;
-    width: 300px;
-    margin: 0 auto;
+    max-width: 1000px;
+    margin: 20px auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 15px;
 }
 
 .filtro-container select, 
-.filtro-container button ,
-.filtro-container input {
-    width: 100%;
+.filtro-container input,
+.filtro-container button {
+    flex: 1;
     padding: 10px;
-    margin-bottom: 15px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;
+    margin-right: 10px;
+}
+
+.filtro-container input {
+    width: 150px; 
+    flex: 0 0 auto;
+  }
+
+  .filtro-container select {
+    flex: 1;
+}
+
+.filtro-container button {
+    flex: 1;
 }
 
 .filtro-container select:focus, 
-.filtro-container button:focus {
+.filtro-container button:focus,
+.filtro-container input:focus {
     outline: none;
     border-color: #007bff;
 }
@@ -39,3 +54,14 @@
     background-color: #0056b3;
 }
 
+.filtro-container input[type="number"] {
+    width: 80px;
+}
+
+.filtro-container button {
+    margin-left: 10px;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #0066cc;
+}

@@ -1,28 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Tarjeta from '../components/Tarjeta';
-import Filtro from './Filtro';
 import Modal from './Modal';
 
-export default function ListaMascotas({mascotas}) {
-
-  const [filtro, setFiltro] = useState({
-    tipo: '',
-    estado: '',
-    sexo: '',
-    edad: '',
-    color: ''
-  });
-
-
-  const mascotasFiltradas = mascotas.filter((mascota) => {
-    return (
-      (filtro.tipo === '' || mascota.tipo === filtro.tipo) &&
-      (filtro.estado === '' || mascota.estado === filtro.estado) &&
-      (filtro.sexo === '' || mascota.genero === filtro.sexo) &&
-      (filtro.color) === '' || mascota.color === filtro.color && 
-      (filtro.edad === '' || mascota.edad === filtro.edad)
-    );
-  });
+export default function ListaMascotas({mascotasFiltradas}) {
 
   const [modalOpen, setModalOpen] = useState(false); 
   const [selectedMascota, setSelectedMascota] = useState(null);
@@ -41,7 +21,6 @@ export default function ListaMascotas({mascotas}) {
 
   return (
     <div>
-            <Filtro setFiltro={setFiltro} />
       <div className="tarjeta-container-principal">
         {mascotasFiltradas.length > 0 ? (
           mascotasFiltradas.map((mascota) => (

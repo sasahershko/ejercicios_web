@@ -1,14 +1,13 @@
 import '../styles/tarjeta.css'
 
-export default function Tarjeta({nombre, imagen, tipo, edad, genero, onClick}){
+export default function Tarjeta({nombre, imagen, edad, genero, onClick}){
 
     return(
         <div className="tarjetas-container" onClick={onClick}>
             <h1>{nombre}</h1>
             <img src={imagen} alt={`Imagen de ${nombre}`} />
-            <p>{tipo}</p>
             <p>{edad}</p>
-            <p>{genero}</p>
+            <p className={`genero ${genero === 'macho' ? 'macho' : 'hembra'}`}>{genero}</p>
         </div>
     )
 }
