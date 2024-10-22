@@ -69,3 +69,11 @@
   margin-top: 8px;
   text-align: center;
 }
+
+.adoptado.si{
+  color: green;
+}
+
+.adoptado.no{
+  color: red;
+}
