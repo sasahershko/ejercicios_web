@@ -7,7 +7,11 @@ export default function Modal({ mascota, onClose, cambiarEstadoAdoptado }) {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
   const handleOnClick = () => {
-    setMostrarFormulario(true); // Muestra el formulario
+    if(mascota.estado === 'adoptado'){
+      console.log('NO');
+    }else{
+      setMostrarFormulario(true); // Muestra el formulario  
+    }
   };
 
   const enviaData = (data) => {
@@ -30,20 +34,20 @@ export default function Modal({ mascota, onClose, cambiarEstadoAdoptado }) {
 
         <div className="modal-info">
           <h2>{mascota.nombre}</h2>
-          <p>Edad: {mascota.edad}</p>
-          <p>Género: {mascota.genero}</p>
-          <p>Personalidad: {eliminarTextoConP(mascota.desc_personalidad)}</p>
-          <p>Descripción adicional: {eliminarTextoConP(mascota.desc_adicional)}</p>
-          <p>Vacunas: {mascota.vacunas}</p>
-          <p>Comuna: {mascota.comuna}</p>
+          <p><strong>Edad:</strong> {mascota.edad}</p>
+          <p><strong>Género:</strong> {mascota.genero}</p>
+          <p><strong>Personalidad:</strong> {eliminarTextoConP(mascota.desc_personalidad)}</p>
+          <p><strong>Descripción adicional:</strong> {eliminarTextoConP(mascota.desc_adicional)}</p>
+          <p><strong>Vacunas:</strong> {mascota.vacunas}</p>
+          <p><strong>Comuna:</strong> {mascota.comuna}</p>
         </div>
 
         <div className="modal-image">
           <img src={mascota.imagen} alt={mascota.nombre} />
-          <button className="adopt-button" onClick={handleOnClick}>Adoptar</button>
+          <button className={`adopt-button ${mascota.estado==='adoptado' ? 'disabled' : ''}`} onClick={handleOnClick} >{mascota.estado === 'adoptado' ? 'Ya adoptado' : 'Adoptar'}</button>
         </div>
 
-        {/* Mostrar el formulario con animación */}
+        
         <div className={`formulario-container ${mostrarFormulario ? 'visible' : 'hidden'}`}>
           <FormularioSolicitud enviaData={enviaData} />
         </div>

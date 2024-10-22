@@ -17,19 +17,19 @@
 .modal-content {
   background-color: white;
   border-radius: 10px;
-  width: 800px;
-  max-width: 90%;
-  max-height: 90%;
+  width: 1000px; /* Ancho fijo */
+  height: 600px; /* Altura fija */
   padding: 30px;
   display: flex;
   gap: 20px;
   position: relative;
   animation: zoomIn 0.4s ease-out;
-  overflow: hidden; /* Para evitar que el contenido "rebase" el contenedor */
-  transition: width 0.5s ease, height 0.5s ease; /* Suaviza el cambio de ancho y altura */
-  justify-content: center; /* Mantener el contenido centrado inicialmente */
-  min-height: 500px; /* Establece una altura mínima para el modal */
-  height: auto; /* Deja que se ajuste según el contenido pero bloquea con min-height */
+  overflow: hidden;
+  transition: width 0.8s ease, height 0.8s ease;
+  justify-content: flex-start; /* Mantiene la imagen y texto alineados a la izquierda */
+  align-items: center; /* Asegura que el contenido esté centrado verticalmente */
+  min-height: 500px;
+  height: auto;
 }
 
 /* Animación para abrir el modal con zoom */
@@ -78,26 +78,15 @@
   overflow: auto;
 }
 
-.modal-text h2 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.modal-text p {
-  font-size: 16px;
-  margin: 8px 0;
-  line-height: 1.5;
-  color: #555;
-}
-
 /* Imagen con tamaño específico */
 .modal-image {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Mantener la imagen centrada en su propio contenedor */
   justify-content: center;
+  max-width: 300px; /* Limitar el tamaño máximo del contenedor de imagen */
+  max-height: 400px;
+  transition: all 0.8s ease-in-out;
 }
 
 .modal-image img {
@@ -108,6 +97,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
+  transition: all 0.8s ease-in-out;
 }
 
 .adopt-button {
@@ -126,9 +116,14 @@
   background-color: #218838;
 }
 
+.adopt-button.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 /* Contenedor del formulario */
 .formulario-container {
-  flex: 1;
+  width: 400px;
   background-color: #f5f5f5;
   border-radius: 10px;
   padding: 20px;
@@ -137,25 +132,25 @@
   justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   opacity: 0;
-  transform: translateX(100%); /* Fuera de vista inicialmente */
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  transform: translateX(100%);
+  transition: transform 0.8s ease, opacity 0.8s ease;
 }
 
 /* Animación de deslizamiento al aparecer el formulario */
 .formulario-container.visible {
   display: flex; /* Mostrar el formulario */
   opacity: 1;
-  transform: translateX(0); /* Desliza hacia dentro */
+  transform: translateX(0);
 }
 
 /* Ajuste de expansión del modal cuando se muestra el formulario */
 .modal-content.expand {
-  transform: scale(1); /* Mantener el tamaño del modal */
-  width: 1200px; /* Expande el modal lateralmente */
+  transform: scale(1);
+  width: 1200px;
   justify-content: space-between; /* Asegura que los elementos estén bien distribuidos */
-  transition: width 0.5s ease, height 0.5s ease; /* Animación fluida */
-  min-height: 500px; /* Mantener la altura mínima fija para evitar saltos */
-  height: auto; /* Ajustar según el contenido sin cambiar demasiado la altura */
+  transition: width 0.8s ease, height 0.8s ease;
+  min-height: 500px;
+  height: auto;
 }
 
 /* Estilo del formulario */

@@ -39,8 +39,6 @@ export default function App() {
   const mascotasFiltradas = mascotas.filter((mascota) => {
     const edadMascotasFiltradas = convertirEdadAMeses(mascota.edad);
 
-    console.log(filtro.edad);
-
     return (
       (filtro.tipo === '' || mascota.tipo === filtro.tipo) &&
       (filtro.estado === '' || mascota.estado === filtro.estado) &&
