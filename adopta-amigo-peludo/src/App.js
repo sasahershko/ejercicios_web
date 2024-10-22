@@ -43,7 +43,7 @@ export default function App() {
       (filtro.estado === '' || mascota.estado === filtro.estado) &&
       (filtro.sexo === '' || mascota.genero === filtro.sexo) &&
       (filtro.color === '' || mascota.color === filtro.color) && 
-      (filtro.edad === 0 || edadMascotasFiltradas === filtro.edad)
+      (filtro.edad === 0 || filtro.edad === '' || edadMascotasFiltradas === filtro.edad)
     );
   }) || []; //asegura que es un array
 
