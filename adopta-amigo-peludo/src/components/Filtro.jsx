@@ -6,7 +6,7 @@ export default function Filtro({ setFiltro }) {
   const [tipo, setTipo] = useState('');
   const [estado, setEstado] = useState('');
   const [sexo, setSexo] = useState('');
-  const [edad, setEdad] = useState();
+  const [edad, setEdad] = useState(0);
   const [unidad, setUnidad] = useState(''); 
   const [color, setColor] = useState('');
 
@@ -15,8 +15,10 @@ export default function Filtro({ setFiltro }) {
     let edadEnMeses;
     if (unidad === 'año') {
       edadEnMeses = parseInt(edad) * 12; //convertir años a meses
-    } else {
+    } else if(unidad === 'mes') {
       edadEnMeses = parseInt(edad); //mantener los meses
+    }else{
+      edadEnMeses = 0;
     }
 
     setFiltro({
@@ -58,7 +60,7 @@ export default function Filtro({ setFiltro }) {
 
       <input 
         type="number" 
-        placeholder={unidad === 'año' ? 'Ingresa el número de años' : 'Ingresa el número de meses'} 
+        placeholder={unidad === 'mes' ? 'Ingresa el número de meses' : 'Ingresa el número de años'} 
         value={edad} 
         onChange={(e) => setEdad(e.target.value)} 
         min="0"

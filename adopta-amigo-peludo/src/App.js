@@ -38,12 +38,15 @@ export default function App() {
 
   const mascotasFiltradas = mascotas.filter((mascota) => {
     const edadMascotasFiltradas = convertirEdadAMeses(mascota.edad);
+
+    console.log(filtro.edad);
+
     return (
       (filtro.tipo === '' || mascota.tipo === filtro.tipo) &&
       (filtro.estado === '' || mascota.estado === filtro.estado) &&
       (filtro.sexo === '' || mascota.genero === filtro.sexo) &&
       (filtro.color === '' || mascota.color === filtro.color) && 
-      (filtro.edad === 0 || filtro.edad === '' || edadMascotasFiltradas === filtro.edad)
+      (filtro.edad === 0 || filtro.edad === '' || edadMascotasFiltradas === filtro.edad || filtro.edad === undefined)
     );
   }) || []; //asegura que es un array
 
