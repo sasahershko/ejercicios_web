@@ -6,7 +6,7 @@ export default function Filtro({ setFiltro }) {
   const [tipo, setTipo] = useState('');
   const [estado, setEstado] = useState('');
   const [sexo, setSexo] = useState('');
-  const [edad, setEdad] = useState(0);
+  const [edad, setEdad] = useState();
   const [unidad, setUnidad] = useState(''); 
   const [color, setColor] = useState('');
 
@@ -66,7 +66,6 @@ export default function Filtro({ setFiltro }) {
 
 
       <select onChange={(e) => setUnidad(e.target.value)} value={unidad}>
-        <option value=""> </option>
         <option value="año">Años</option>
         <option value="mes">Meses</option>
       </select>

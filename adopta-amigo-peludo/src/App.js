@@ -47,6 +47,14 @@ export default function App() {
     );
   }) || []; //asegura que es un array
 
+  //CAMBIAR ESTADO A ADOPTADO
+  const cambiarEstadoAdoptado = (idMascota) =>{
+    const nuevasMascotas = mascotas.map((mascota) => 
+      mascota.id === idMascota ? {...mascota, estado:'adoptado'} : mascota
+    );
+
+    setMascotas(nuevasMascotas);
+  }
 
   //función para descargar las mascotas de la API
   async function downloadMascotas() {
@@ -67,7 +75,7 @@ export default function App() {
     <div>
       <h1>¡Adopta a un amigo peludo!</h1>
       <Filtro setFiltro={setFiltro} />
-      <ListaMascotas mascotasFiltradas={mascotasFiltradas}/>
+      <ListaMascotas mascotasFiltradas={mascotasFiltradas} cambiarEstadoAdoptado={cambiarEstadoAdoptado}/>
     </div>
   );
 }

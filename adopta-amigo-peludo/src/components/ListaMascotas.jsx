@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Tarjeta from '../components/Tarjeta';
 import Modal from './Modal';
 
-export default function ListaMascotas({mascotasFiltradas}) {
+export default function ListaMascotas({mascotasFiltradas, cambiarEstadoAdoptado}) {
 
   const [modalOpen, setModalOpen] = useState(false); 
   const [selectedMascota, setSelectedMascota] = useState(null);
@@ -45,6 +45,7 @@ export default function ListaMascotas({mascotasFiltradas}) {
         <Modal 
           mascota={selectedMascota} 
           onClose={closeModal} 
+          cambiarEstadoAdoptado={cambiarEstadoAdoptado}
         />
       )}
 

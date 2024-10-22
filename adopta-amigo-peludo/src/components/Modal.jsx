@@ -2,7 +2,7 @@ import {useState} from 'react';
 import FormularioSolicitud from '../components/FormularioSolicitud'
 import '../styles/modal.css';
 
-export default function Moda({mascota, onClose}){
+export default function Moda({mascota, onClose, cambiarEstadoAdoptado}){
 
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
@@ -12,6 +12,8 @@ export default function Moda({mascota, onClose}){
 
     const enviaData = (data) =>{
         console.log('Datos encviados' + data);
+
+        cambiarEstadoAdoptado(mascota.id);
         //setMostrarFormulario(false);
     }
 
