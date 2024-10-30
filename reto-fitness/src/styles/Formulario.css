@@ -1,0 +1,168 @@
+
+body {
+    background-color: #F5F5F5;
+    font-family: Arial, sans-serif;
+    color: #616161;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+
+/* Contenedor principal */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* Estilo del encabezado */
+.page-container h1 {
+    font-size: 3rem;
+    color: #4CAF50;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Contenedor del formulario en columnas */
+.formulario-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    max-width: 1200px;
+}
+
+/* Cajas individuales */
+.form-section {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    flex: 1 1 45%; /* Ajusta el ancho de cada caja */
+    min-width: 250px; /* Ancho mínimo para cada caja */
+    max-width: 300px; /* Ancho máximo para mantenerlas estrechas */
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid #4CAF50;
+    text-align: center;
+}
+
+
+/* Título de cada sección */
+.form-section h2 {
+    margin-top: 0;
+    color: #4CAF50;
+    font-size: 1.5rem;
+}
+
+/* Título */
+.formulario-container h1 {
+    color: #4CAF50;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+/* Estilo de Inputs y Select */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #4CAF50;
+}
+
+
+
+.input-group input,
+.input-group select {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #A5D6A7;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #4CAF50;
+}
+
+/* Mensajes de Error */
+.error {
+    color: #FF5252;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+}
+
+.button-submit {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 2rem;
+}
+
+.button-submit:hover {
+    background-color: #388E3C;
+}
+
+/* Estilos para los Campos de Pago */
+.payment-section {
+    margin-top: 1.5rem;
+}
+
+.payment-section input {
+    margin-top: 0.5rem;
+}
+
+.payment-section select {
+    margin-top: 0.5rem;
+}
+
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+    .formulario-container {
+        padding: 1.5rem;
+    }
+
+    .formulario-container h1 {
+        font-size: 1.6rem;
+    }
+
+    .button-submit {
+        font-size: 1rem;
+    }
+}
+
+
+/* Ajustar el estilo de la letra en los checkboxes */
+.checkbox-label {
+    font-weight: 300; /* Letra más fina */
+    color: #4CAF50;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Cambiar el color del checkbox */
+.checkbox-label input[type="checkbox"] {
+    accent-color: #4CAF50; /* Cambia el color aquí */
+    width: 16px;
+    height: 16px;
+}
