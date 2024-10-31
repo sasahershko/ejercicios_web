@@ -127,7 +127,6 @@ export default function Formulario() {
     return (
         <form onSubmit={formik.handleSubmit}>
             <div className="page-container">
-                <h1>FITLIFE</h1>
                 <div className="formulario-container">
                     {currentStep === 1 && <DatosPersonales formik={formik} />}
                     {currentStep === 2 && <InformacionContacto formik={formik} />}
