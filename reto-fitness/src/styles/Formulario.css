@@ -179,3 +179,25 @@ body {
     width: 16px;
     height: 16px;
 }
+
+
+/* Mensaje de éxito */
+.success-message {
+    color: #4CAF50;
+    font-weight: bold;
+    margin-top: 1rem;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Mensaje de error */
+.error-message {
+    color: #FF5252;
+    font-weight: bold;
+    margin-top: 1rem;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

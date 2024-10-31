@@ -11,6 +11,7 @@ export default function Formulario() {
 
     //para siguiente paso, y paso anterior
     const [currentStep, setCurrentStep] = useState(1);
+    const [submitStatus, setSubmitStatus] = useState(null);
 
     //lo pongo por pasos, para que dependiendo del paso en el que estemos, valide un campo u otro
     const validationSchemas = [
@@ -52,6 +53,9 @@ export default function Formulario() {
         },
         validationSchema: validationSchemas[currentStep - 1], //uso el esquema de validación del paso actual
         onSubmit: async (values) => {
+            //valores iniciales:
+            setSubmitStatus(null);
+
             //esto lo hago por el tema de que el when no me funciona
             const errors = {}
 
@@ -74,19 +78,24 @@ export default function Formulario() {
                 return;
             }
 
-            const response = await fetch('https://api.fitlife.com/registro', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(values),
-            });
-
-            if (response.ok) {
-                console.log('Usuario registrado correctamente.');
-            } else {
-                console.log('Error al registrar el usuario.');
+            try{
+                const response = await fetch('https://api.fitlife.com/registro', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(values),
+                });
+            
+                if (response.ok) {
+                    setSubmitStatus('success');
+                } else {
+                    setSubmitStatus('error');
+                }
+            }catch(e){
+                setSubmitStatus('error');
             }
+
         },
         validateOnChange: false, //para que no se valide al cambiar el valor, ya que si cambio el método me salta el error en todos los campos que no he tocado
     });
@@ -130,6 +139,14 @@ export default function Formulario() {
                     {currentStep > 1 && (<button type='button' onClick={prevStep} className='button-submit'>Anterior</button>)}
                     {currentStep < 4 ? <button type='button' onClick={nextStep} className='button-submit'>Siguiente</button> : <button type='submit' className='button-submit'>Enviar</button>}
                 </div>
+
+
+                {submitStatus === 'success' && (
+                    <div className="success-message">¡Formulario enviado con éxito!</div>
+                )}
+                {submitStatus === 'error' && (
+                    <div className="error-message">Error al enviar el formulario. Inténtalo de nuevo. API no funciona.</div>
+                )}
             </div>
 
         </form>
