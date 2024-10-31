@@ -1,4 +1,4 @@
-export default function InformacionContacto({ formik }) {
+export default function InformacionContacto({ formik}) {
     return (
         <div className="form-section">
             <h2>Información de Contacto</h2>

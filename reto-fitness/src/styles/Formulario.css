@@ -38,15 +38,17 @@ body {
 
 /* Cajas individuales */
 .form-section {
-    background-color: #ffffff;
+    width: 100%; /* Haz que el ancho sea flexible dentro de su contenedor */
+    max-width: 500px; /* Define un ancho máximo consistente para todas las cajas */
+    min-height: 300px; /* Altura mínima para dar uniformidad */
+    margin: 0 auto; /* Centra la caja en el contenedor */
     padding: 1.5rem;
-    flex: 1 1 45%; /* Ajusta el ancho de cada caja */
-    min-width: 250px; /* Ancho mínimo para cada caja */
-    max-width: 300px; /* Ancho máximo para mantenerlas estrechas */
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
-    border-left: 4px solid #4CAF50;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espaciado entre los elementos internos */
 }
 
 

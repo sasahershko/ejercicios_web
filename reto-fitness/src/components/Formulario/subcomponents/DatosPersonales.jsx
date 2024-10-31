@@ -1,4 +1,4 @@
-export default function DatosPersonales({ formik }) {
+export default function DatosPersonales({ formik}) {
     return (
         <div className="form-section">
             <h2>Datos Personales</h2>

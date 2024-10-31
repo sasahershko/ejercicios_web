@@ -1,5 +1,5 @@
 
-export default function DatosPago({ formik }) {
+export default function DatosPago({ formik}) {
 
     return (
         <div className="form-section">

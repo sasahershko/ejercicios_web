@@ -1,4 +1,4 @@
-export default function PreferenciasEntrenamiento({ formik }) {
+export default function PreferenciasEntrenamiento({ formik}) {
 
     const handleCheckboxChange = (e) => {
         const valor = e.target.value; //valor del checkbox
