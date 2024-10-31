@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import DatosPersonales from './subcomponents/DatosPersonales';
@@ -31,20 +31,6 @@ export default function Formulario() {
         }),
         Yup.object({
             metodoPago: Yup.string().required('El método de pago es obligatorio.'),
-            numeroTarjeta: Yup.string().when('metodoPago', {
-                is: 'tarjeta',
-                then: Yup.string().required('El número de tarjeta es obligatorio.').length(16, 'Debe tener 16 dígitos.')
-            }),
-            cvv: Yup.string().when('metodoPago', {
-                is: 'tarjeta',
-                then: Yup.string().required('El CVV es obligatorio').length(3, 'Debe tener 3 dígitos.')
-            }),
-            fechaExpiracion: Yup.string().when('metodoPago', {
-                is: 'tarjeta',
-                then: Yup.string()
-                    .required('La fecha de expiración es obligatoria.')
-                    .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, 'Formato inválido. Usa MM/AA')
-            })
         })
     ];
 
@@ -64,8 +50,30 @@ export default function Formulario() {
             cvv: '',
             fechaExpiracion: ''
         },
-        validationSchema: validationSchemas[currentStep -1], //uso el esquema de validación del paso actual
+        validationSchema: validationSchemas[currentStep - 1], //uso el esquema de validación del paso actual
         onSubmit: async (values) => {
+            //esto lo hago por el tema de que el when no me funciona
+            const errors = {}
+
+            //lo hago asi, ya que el .when no me funciona
+
+            if (values.metodoPago === 'tarjeta') {
+                if (values.numeroTarjeta.length !== 16) {
+                    errors.numeroTarjeta = 'El número de tarjeta debe tener 16 dígitos.';
+                }
+                if (values.cvv.length !== 3) {
+                    errors.cvv = 'El CVV debe tener 3 dígitos.';
+                }
+                if (!values.fechaExpiracion || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(values.fechaExpiracion)) {
+                    errors.fechaExpiracion = 'La fecha de expiración debe tener el formato MM/AA.';
+                }
+            }
+
+            if (Object.keys(errors).length > 0) {
+                formik.setErrors(errors);
+                return;
+            }
+
             const response = await fetch('https://api.fitlife.com/registro', {
                 method: 'POST',
                 headers: {
@@ -73,19 +81,6 @@ export default function Formulario() {
                 },
                 body: JSON.stringify(values),
             });
-
-            // //lo hago asi, ya que el .when no me funciona
-            // if(values.metodoPago === 'tarjeta'){
-            //     if(values.numeroTarjeta.length !== 16){
-            //         formik.setErrors({numeroTarjeta: 'El número de tarjeta debe tener 16 dígitos.'});
-            //     }
-            //     if(values.cvv.length !== 3){
-            //         formik.setErrors({cvv: 'El cvv debe tener 3 dígitos.'});
-            //     }
-            //     if(!values.fechaExpiracion || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(values.fechaExpiracion)){
-            //         formik.setErrors({fechaExpiracion: 'La fecha de expiración debe tener el formato MM/YY.'});
-            //     }
-            // }
 
             if (response.ok) {
                 console.log('Usuario registrado correctamente.');
@@ -115,25 +110,28 @@ export default function Formulario() {
             camposAValidar.forEach((field) => formik.setFieldTouched(field, true));
         }
     };
-    
-    const prevStep = () =>{
-        setCurrentStep((prevStep) => prevStep -1);
+
+    const prevStep = () => {
+        setCurrentStep((prevStep) => prevStep - 1);
     }
 
     return (
-        <div className="page-container">
-            <h1>FITLIFE</h1> 
-            <div className="formulario-container">
-                {currentStep === 1  &&  <DatosPersonales formik={formik}/>}
-                {currentStep === 2  &&  <InformacionContacto formik={formik} />}
-                {currentStep === 3  &&  <PreferenciasEntrenamiento formik={formik} />}
-                {currentStep === 4  &&  <DatosPago formik={formik} />}
+        <form onSubmit={formik.handleSubmit}>
+            <div className="page-container">
+                <h1>FITLIFE</h1>
+                <div className="formulario-container">
+                    {currentStep === 1 && <DatosPersonales formik={formik} />}
+                    {currentStep === 2 && <InformacionContacto formik={formik} />}
+                    {currentStep === 3 && <PreferenciasEntrenamiento formik={formik} />}
+                    {currentStep === 4 && <DatosPago formik={formik} />}
+                </div>
+
+                <div className='button-group'>
+                    {currentStep > 1 && (<button type='button' onClick={prevStep} className='button-submit'>Anterior</button>)}
+                    {currentStep < 4 ? <button type='button' onClick={nextStep} className='button-submit'>Siguiente</button> : <button type='submit' className='button-submit'>Enviar</button>}
+                </div>
             </div>
 
-           <div className='button-group'>
-                {currentStep > 1 && (<button type='button' onClick={prevStep} className='button-submit'>Anterior</button>)}
-                {currentStep < 4 ? <button type='button' onClick={nextStep} className='button-submit'>Siguiente</button> : <button type='submit' className='button-submit'>Enviar</button>}
-           </div>
-        </div>
+        </form>
     );
 }
